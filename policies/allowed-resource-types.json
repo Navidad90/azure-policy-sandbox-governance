@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "displayName": "Allowed resource types",
+    "policyType": "BuiltIn",
+    "mode": "Indexed",
+    "description": "Restrict the resource types your organization can deploy.",
+    "metadata": {
+      "category": "General"
+    },
+    "parameters": {
+      "listOfResourceTypesAllowed": {
+        "type": "Array",
+        "metadata": {
+          "description": "Allowed resource types.",
+          "displayName": "Allowed resource types"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "type",
+          "in": "[parameters('listOfResourceTypesAllowed')]"
+        }
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
